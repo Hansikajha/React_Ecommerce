@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FiBook, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -18,6 +19,31 @@ export default function Contact() {
     setFormData({ name: "", email: "", message: "" });
   };
 
+  const contactCards = [
+    {
+      title: "Documentation",
+      subtitle: "abcd.com/docs",
+      isLink: true,
+      href: "https://abcd.com/docs",
+      Icon: FiBook,
+    },
+    {
+      title: "Our Email",
+      subtitle: "hello@mail.com",
+      Icon: FiMail,
+    },
+    {
+      title: "Phone",
+      subtitle: "+977 1252497852",
+      Icon: FiPhone,
+    },
+    {
+      title: "Visit Us",
+      subtitle: "Kathmandu, Nepal",
+      Icon: FiMapPin,
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       {/* Heading */}
@@ -31,9 +57,9 @@ export default function Contact() {
       </div>
 
       {/* Contact Form & Info */}
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
         {/* Form */}
-        <div className="bg-white p-8 rounded-xl shadow-md">
+        <div className="bg-white p-8 rounded-xl shadow-md h-full">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-gray-700 font-medium mb-1" htmlFor="name">
@@ -86,17 +112,33 @@ export default function Contact() {
           </form>
         </div>
 
-        {/* Contact Info */}
-        <div className="bg-white p-8 rounded-xl shadow-md flex flex-col justify-center">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-4">Get in Touch</h3>
-          <p className="text-gray-600 mb-4">
-            You can also reach us at:
-          </p>
-          <ul className="text-gray-700 space-y-2">
-            <li><strong>Address:</strong> 123 MyShop Street, City, Country</li>
-            <li><strong>Email:</strong> support@myshop.com</li>
-            <li><strong>Phone:</strong> +123 456 7890</li>
-          </ul>
+        {/* Contact Info Grid */}
+        <div className="bg-white p-8 rounded-xl shadow-md flex flex-col h-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-full">
+            {contactCards.map(({ title, subtitle, Icon, isLink, href }) => (
+              <div
+                key={title}
+                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col"
+              >
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 text-xl mb-4">
+                  <Icon />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
+                {isLink ? (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-blue-600 transition-colors"
+                  >
+                    {subtitle}
+                  </a>
+                ) : (
+                  <p className="text-gray-500">{subtitle}</p>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
