@@ -38,11 +38,6 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/about" className="hover:text-[#CD2C58] transition-colors">
-                About
-              </Link>
-            </li>
-            <li>
               <Link to="/contact" className="hover:text-[#CD2C58] transition-colors">
                 Contact
               </Link>
