@@ -8,6 +8,9 @@ import womenWearImage from "../assets/women-wear.jpg";
 import menWearImage from "../assets/men-wear.jpg";
 import bannerImage from "../assets/banner.png";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import FullPageSkeleton from "../components/FullPageSkeleton";
+
+
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -113,7 +116,7 @@ export default function Home() {
       if (!sliderRef.current) return;
       isDraggingRef.current = true;
       dragStartXRef.current = event.clientX;
-       activePointerIdRef.current = event.pointerId;
+      activePointerIdRef.current = event.pointerId;
       sliderRef.current.setPointerCapture?.(event.pointerId);
       setIsDragging(true);
     },
@@ -137,11 +140,7 @@ export default function Home() {
   );
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-gray-50">
-        <p className="text-gray-600 text-lg">Loading products...</p>
-      </div>
-    );
+    return <FullPageSkeleton />;
   }
 
   const womenProducts = products.filter((product) =>
@@ -159,9 +158,8 @@ export default function Home() {
       {/* Hero Section Slider */}
       <div
         ref={sliderRef}
-        className={`relative w-full h-[400px] md:h-[500px] overflow-hidden select-none ${
-          isDragging ? "cursor-grabbing" : "cursor-grab"
-        }`}
+        className={`relative w-full h-[400px] md:h-[500px] overflow-hidden select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"
+          }`}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMoveEvent}
         onPointerUp={handlePointerEndEvent}
@@ -211,11 +209,10 @@ export default function Home() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index
                   ? "bg-white w-8"
                   : "bg-white bg-opacity-50 hover:bg-opacity-75"
-              }`}
+                }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}

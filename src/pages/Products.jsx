@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getProducts } from "../api/products"; // your API file
 import ProductCard from "../components/ProductCard";
+import FullPageSkeleton from "../components/FullPageSkeleton";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -49,13 +50,9 @@ export default function Products() {
   // Extract unique categories
   const categories = ["All", ...new Set(products.map((p) => p.category))];
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center h-screen bg-gray-50">
-        <p className="text-gray-600 text-lg">Loading products...</p>
-      </div>
-    );
-
+  if (loading) {
+    return <FullPageSkeleton />;
+  }
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">

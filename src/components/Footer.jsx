@@ -3,6 +3,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/f
 import { Link } from "react-router-dom";
 import carterLogo from "../assets/carter_logo.png";
 
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-200 mt-12">
@@ -11,9 +12,9 @@ export default function Footer() {
         {/* Brand Section */}
         <div>
           <Link to="/" className="inline-block mb-4">
-            <img 
-              src={carterLogo} 
-              alt="Carter Logo" 
+            <img
+              src={carterLogo}
+              alt="Carter Logo"
               className="h-10 w-auto"
             />
           </Link>
@@ -48,6 +49,8 @@ export default function Footer() {
             </li>
           </ul>
         </div>
+
+       
 
         {/* Social / Contact */}
         <div>
