@@ -52,7 +52,7 @@ export default function Contact() {
           Contact Us
         </h1>
         <p className="text-gray-600">
-          Have a question or need assistance? Fill out the form below and we’ll get back to you as soon as possible.
+          Have a question or need assistance? Fill out the form below and we'll get back to you as soon as possible.
         </p>
       </div>
 
@@ -105,7 +105,7 @@ export default function Contact() {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              className="w-full bg-gray-800 text-white font-medium py-3 rounded-lg hover:bg-[#CD2C58] transition-colors"
             >
               Send Message
             </button>

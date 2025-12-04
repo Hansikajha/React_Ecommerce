@@ -6,10 +6,8 @@ import { useCart } from "../context/CartContext";
 export default function Cart() {
   const { cartItems, removeFromCart, getCartTotal } = useCart();
 
-  // Calculate total
   const totalPrice = getCartTotal();
 
-  // Empty cart
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4">
@@ -29,21 +27,18 @@ export default function Cart() {
         Your Shopping Cart
       </h1>
 
-      {/* Cart Items */}
       <div className="max-w-6xl mx-auto space-y-6">
         {cartItems.map((item) => (
           <div
             key={item.id}
             className="bg-white p-4 rounded-xl shadow-md flex flex-col md:flex-row items-center gap-4"
           >
-            {/* Image */}
             <img
               src={item.image}
               alt={item.title}
               className="w-32 h-32 object-contain rounded-lg"
             />
 
-            {/* Info */}
             <div className="flex-1 flex flex-col md:flex-row md:justify-between items-start md:items-center w-full">
               <div className="flex-1">
                 <h2 className="text-lg font-semibold text-gray-800">
@@ -52,7 +47,6 @@ export default function Cart() {
                 <p className="text-gray-600 mt-1">${item.price.toFixed(2)}</p>
               </div>
 
-              {/* Quantity & Remove */}
               <div className="flex items-center gap-4 mt-4 md:mt-0">
                 <p className="text-gray-800 font-medium">Qty: {item.quantity}</p>
                 <button
@@ -67,19 +61,17 @@ export default function Cart() {
           </div>
         ))}
 
-        {/* Total & Checkout */}
         <div className="bg-white p-6 rounded-xl shadow-md flex flex-col md:flex-row justify-between items-center">
           <div>
             <p className="text-xl font-semibold text-gray-800 mb-2">
-              Total:{" "}
-              <span className="text-[#CD2C58]">${totalPrice.toFixed(2)}</span>
+              Total: <span className="text-[#CD2C58]">${totalPrice.toFixed(2)}</span>
             </p>
             <p className="text-sm text-gray-600">
               {cartItems.reduce((sum, item) => sum + item.quantity, 0)} item(s) in cart
             </p>
           </div>
-          <Link 
-            to="/checkout" 
+          <Link
+            to="/checkout"
             className="mt-4 md:mt-0 bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#CD2C58] transition-colors"
           >
             Proceed to Checkout

@@ -4,6 +4,11 @@ import { getProductById } from "../api/products";
 import { FaShoppingCart } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import Toast from "../components/Toast";
+import { CiLocationOn } from "react-icons/ci";
+import { LiaShippingFastSolid } from "react-icons/lia";
+import { PiHandCoins } from "react-icons/pi";
+import { MdAutorenew } from "react-icons/md";
+import { RiErrorWarningLine } from "react-icons/ri";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -62,9 +67,9 @@ export default function ProductDetails() {
 
         {/*        SECTION 1          */}
 
-        <div className="bg-white rounded-xl shadow-md overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+        <div className="bg-white rounded-xl shadow-md p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-          {/* LEFT: Image */}
+          {/* LEFT: IMAGE */}
           <div className="flex items-center justify-center bg-gray-100 rounded-lg p-6">
             <img
               src={product.image}
@@ -73,70 +78,115 @@ export default function ProductDetails() {
             />
           </div>
 
-          {/* RIGHT: Product Details */}
+          {/* MIDDLE: PRODUCT DETAILS */}
           <div className="flex flex-col justify-between">
             <div>
               <h1 className="text-3xl font-bold text-gray-800">{product.title}</h1>
 
-              {/* Brand */}
-              <p className="mt-2 text-gray-500 text-sm">
-                Brand: <span className="font-medium text-gray-700">{product.brand || "Unknown Brand"}</span>
+              <p className="mt-1 text-gray-500 text-sm">
+                Brand:
+                <span className="font-medium text-gray-700 ml-1">
+                  {product.brand || "Unknown Brand"}
+                </span>
               </p>
 
-              {/* Interactive Rating */}
-              <div className="mt-2">
-                <div className="flex items-center gap-1">
-                  <p className="text-gray-600 text-sm mb-1">Rating:</p>
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <span
-                      key={star}
-                      onClick={() => setUserRating(star)}
-                      className={`text-2xl cursor-pointer transition-colors ${star <= userRating ? "text-yellow-400" : "text-gray-300"
-                        }`}
-                    >
-                      ★
-                    </span>
-                  ))}
-                </div>
+              {/* Rating */}
+              <div className="mt-2 flex items-center gap-1">
+                <p className="text-gray-500 text-sm">Rating:</p>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <span
+                    key={star}
+                    onClick={() => setUserRating(star)}
+                    className={`text-xl cursor-pointer ${star <= userRating ? "text-yellow-400" : "text-gray-300"
+                      }`}
+                  >
+                    ★
+                  </span>
+                ))}
               </div>
 
-              <p className="mt-4 text-xl font-semibold text-blue-600">
+              <p className="mt-3 text-2xl font-semibold text-[#CD2C58]">
                 ${product.price.toFixed(2)}
               </p>
-
             </div>
 
             {/* Quantity + Add to Cart */}
-            <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="mt-6 flex items-center gap-4">
               <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
                 <button
-                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="px-4 py-2 bg-gray-200 hover:bg-gray-300 transition-colors"
+                  onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                  className="px-4 py-2 bg-gray-200"
                 >
                   -
                 </button>
-                <span className="px-6 py-2 text-gray-800 font-medium">
-                  {quantity}
-                </span>
+
+                <span className="px-6 py-2">{quantity}</span>
+
                 <button
-                  onClick={() => setQuantity((q) => q + 1)}
-                  className="px-4 py-2 bg-gray-200 hover:bg-gray-300 transition-colors"
+                  onClick={() => setQuantity(q => q + 1)}
+                  className="px-4 py-2 bg-gray-200"
                 >
                   +
                 </button>
               </div>
 
-              <button
-                onClick={handleAddToCart}
-                className="flex items-center justify-center gap-2 bg-[#CD2C58] text-white font-medium px-6 py-3 rounded-lg hover:bg-[#b0254a] transition-colors"
-              >
+              <button className="flex items-center gap-2 bg-[#CD2C58] text-white px-6 py-3 rounded-lg"
+                onClick={handleAddToCart}>
                 <FaShoppingCart />
                 Add to Cart
               </button>
             </div>
           </div>
-        </div>
 
+          {/* RIGHT: DELIVERY OPTIONS */}
+          <div className=" bg-gray-50 rounded-lg p-4 flex flex-col justify-start h-full">
+
+            <h2 className="text-gray-800 font-semibold text-sm mb-3 mt-4">
+              Delivery Options
+            </h2>
+
+            {/* Location */}
+            <div className="flex items-start gap-2 text-sm text-gray-700 mb-3">
+              <CiLocationOn className="text-gray-500 text-lg" />
+              <div>
+                Bagmati, Kathmandu <br />
+                <span className="text-blue-600 text-xs cursor-pointer">Change</span>
+              </div>
+            </div>
+
+            {/* Standard Delivery */}
+            <div className="flex items-start gap-2 text-sm text-gray-700 mb-3">
+              <LiaShippingFastSolid className="text-gray-500 text-lg" />
+              <div>
+                Standard Delivery
+                <div className="text-gray-500 text-xs">Rs. 83</div>
+              </div>
+            </div>
+
+            {/* Cash On Delivery */}
+            <div className="flex items-start gap-2 text-sm text-gray-700 mb-3">
+              <PiHandCoins className="text-gray-500 text-lg" />
+              <p>Cash on Delivery Available</p>
+            </div>
+
+            {/* Return & Warranty */}
+            <h2 className="text-gray-800 font-semibold text-sm mt-15 mb-3">
+              Return & Warranty
+            </h2>
+
+            <div className="flex items-start gap-2 text-sm text-gray-700 mt-2 mb-2">
+              <MdAutorenew className="text-gray-500 text-lg" />
+              <p>14 Days Free Returns</p>
+            </div>
+
+            <div className="flex items-start gap-2 text-sm text-gray-700">
+              <RiErrorWarningLine className="text-gray-500 text-lg" />
+              <p>Warranty not available</p>
+            </div>
+
+          </div>
+
+        </div>
 
         {/*        SECTION 2          */}
 
@@ -161,7 +211,7 @@ export default function ProductDetails() {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Write your comment..."
-              className="flex-1 border border-gray-400 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full h-15 border border-gray-400 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
               rows="3"
             ></textarea>
 
@@ -181,7 +231,7 @@ export default function ProductDetails() {
               comments.map((c, index) => (
                 <div
                   key={index}
-                  className="border rounded-md p-3 bg-gray-50 text-sm text-gray-700"
+                  className="bg-gray-100 rounded-md p-3 text-sm text-gray-700"
                 >
                   {c}
                 </div>
@@ -189,8 +239,6 @@ export default function ProductDetails() {
             )}
           </div>
         </div>
-
-
       </div>
     </div>
   );
