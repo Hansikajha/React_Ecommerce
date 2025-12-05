@@ -9,6 +9,7 @@ import { LiaShippingFastSolid } from "react-icons/lia";
 import { PiHandCoins } from "react-icons/pi";
 import { MdAutorenew } from "react-icons/md";
 import { RiErrorWarningLine } from "react-icons/ri";
+import MagnifierImage from "../components/MagnifierImage";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -70,13 +71,10 @@ export default function ProductDetails() {
         <div className="bg-white rounded-xl shadow-md p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
 
           {/* LEFT: IMAGE */}
-          <div className="flex items-center justify-center bg-gray-100 rounded-lg p-6">
-            <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-[350px] object-contain"
-            />
+          <div className="flex items-center justify-center cursor-pointer">
+            <MagnifierImage src={product.image} alt={product.title} zoom={2.2} lensSize={160} />
           </div>
+
 
           {/* MIDDLE: PRODUCT DETAILS */}
           <div className="flex flex-col justify-between">
